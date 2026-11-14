@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.bak
+*.sql
+.env
+.venv/
+venv/
+app_nuevo.py
+app_funcional_respaldo.py
+app_respaldo.py
