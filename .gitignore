@@ -9,3 +9,4 @@ app_nuevo.py
 app_funcional_respaldo.py
 app_respaldo.py
 log.txt
+!db/init.sql
