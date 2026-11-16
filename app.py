@@ -50,6 +50,334 @@ ETIQUETAS = {
     "id_libro": "Libro"
 }
 
+# ---------------------------------------------------------------
+# Estilos (morado, blanco y negro). Se guarda como texto normal
+# para no tener que duplicar las llaves del CSS.
+# ---------------------------------------------------------------
+ESTILOS = """
+:root {
+    --morado: #6A0DAD;
+    --morado-oscuro: #4B0082;
+    --morado-claro: #F3E8FF;
+    --negro: #111111;
+    --gris-texto: #4B5563;
+    --gris-borde: #E5E1EC;
+    --fondo: #F6F4FA;
+    --blanco: #FFFFFF;
+    --rojo: #C62828;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    background: var(--fondo);
+    color: var(--negro);
+    line-height: 1.5;
+}
+
+/* ---------- Barra superior ---------- */
+.topbar {
+    background: var(--negro);
+    border-bottom: 3px solid var(--morado);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.marca {
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.marca .logo {
+    background: var(--morado);
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.marca small {
+    color: #C4B5FD;
+    font-weight: 400;
+    font-size: 13px;
+    display: block;
+    margin-top: -2px;
+}
+
+nav { display: flex; gap: 6px; flex-wrap: wrap; }
+
+nav a {
+    color: #E5E7EB;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: background .15s, color .15s;
+}
+
+nav a:hover { background: var(--morado); color: var(--blanco); }
+
+/* ---------- Contenido ---------- */
+.contenedor {
+    width: 100%;
+    max-width: 1200px;
+    margin: 28px auto;
+    padding: 0 20px;
+}
+
+.aviso {
+    background: var(--morado-claro);
+    border-left: 5px solid var(--morado);
+    color: var(--morado-oscuro);
+    padding: 14px 18px;
+    margin-bottom: 22px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* ---------- Tarjetas de resumen ---------- */
+.resumen {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+    margin-bottom: 26px;
+}
+
+.tarjeta {
+    background: var(--blanco);
+    border-radius: 14px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: var(--negro);
+    border: 1px solid var(--gris-borde);
+    border-top: 4px solid var(--morado);
+    box-shadow: 0 2px 10px rgba(75, 0, 130, .06);
+    transition: transform .15s, box-shadow .15s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(75, 0, 130, .15);
+}
+
+.tarjeta .numero {
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--morado);
+    line-height: 1.1;
+}
+
+.tarjeta .nombre {
+    color: var(--gris-texto);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* ---------- Paneles ---------- */
+.panel {
+    background: var(--blanco);
+    padding: 24px;
+    margin-bottom: 26px;
+    border-radius: 14px;
+    border: 1px solid var(--gris-borde);
+    box-shadow: 0 2px 10px rgba(75, 0, 130, .06);
+    overflow-x: auto;
+}
+
+.panel-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+h2 {
+    margin: 0;
+    color: var(--negro);
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h2::before {
+    content: "";
+    width: 6px;
+    height: 24px;
+    border-radius: 3px;
+    background: var(--morado);
+    display: inline-block;
+}
+
+.contador {
+    background: var(--morado-claro);
+    color: var(--morado-oscuro);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+/* ---------- Tablas ---------- */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 6px;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid var(--gris-borde);
+}
+
+th {
+    background: var(--negro);
+    color: var(--blanco);
+    padding: 13px 14px;
+    text-align: left;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+}
+
+th:first-child { border-top-left-radius: 9px; }
+th:last-child  { border-top-right-radius: 9px; }
+
+td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--gris-borde);
+    color: var(--gris-texto);
+}
+
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: #FAF8FD; }
+tbody tr:hover td { background: var(--morado-claro); color: var(--negro); }
+
+.vacio {
+    text-align: center;
+    color: #9CA3AF;
+    padding: 26px;
+    font-style: italic;
+}
+
+.acciones { white-space: nowrap; text-align: right; }
+
+/* ---------- Botones ---------- */
+.btn {
+    display: inline-block;
+    padding: 9px 16px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 2px;
+    font-family: inherit;
+    transition: background .15s, color .15s, border-color .15s, transform .1s;
+}
+
+.btn:active { transform: scale(.97); }
+
+.btn-primario { background: var(--morado); color: var(--blanco); }
+.btn-primario:hover { background: var(--morado-oscuro); }
+
+.btn-oscuro { background: var(--negro); color: var(--blanco); }
+.btn-oscuro:hover { background: #333; }
+
+.btn-borde {
+    background: var(--blanco);
+    color: var(--negro);
+    border-color: var(--negro);
+}
+.btn-borde:hover { background: var(--negro); color: var(--blanco); }
+
+.btn-peligro {
+    background: var(--blanco);
+    color: var(--rojo);
+    border-color: var(--rojo);
+}
+.btn-peligro:hover { background: var(--rojo); color: var(--blanco); }
+
+/* ---------- Formularios ---------- */
+.formulario { max-width: 640px; margin: 0 auto 26px; }
+
+label {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--negro);
+    margin-top: 6px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 8px 0 18px;
+    border: 2px solid var(--gris-borde);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    background: var(--blanco);
+    color: var(--negro);
+    transition: border-color .15s, box-shadow .15s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--morado);
+    box-shadow: 0 0 0 4px rgba(106, 13, 173, .15);
+}
+
+.barra-botones { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+/* ---------- Pie ---------- */
+footer {
+    text-align: center;
+    padding: 26px 20px 34px;
+    color: #6B7280;
+    font-size: 14px;
+}
+
+footer strong { color: var(--morado); }
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 640px) {
+    .topbar-inner { justify-content: center; }
+    .marca { font-size: 19px; }
+    .panel { padding: 16px; }
+    th, td { padding: 10px; font-size: 13px; }
+    .acciones { white-space: normal; }
+}
+"""
+
 
 def pagina(contenido, mensaje=""):
 
@@ -65,147 +393,67 @@ def pagina(contenido, mensaje=""):
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Biblioteca Digital</title>
-
-        <style>
-            * {{ box-sizing: border-box; }}
-
-            body {{
-                margin: 0;
-                font-family: Arial;
-                background: #f1f2f6;
-                color: #333;
-            }}
-
-            header {{
-                background: #6A0DAD;
-                color: white;
-                padding: 25px;
-                text-align: center;
-                font-size: 30px;
-                font-weight: bold;
-            }}
-
-            nav {{
-                background: #4B0082;
-                padding: 15px;
-                text-align: center;
-            }}
-
-            nav a {{
-                color: white;
-                text-decoration: none;
-                margin: 10px;
-                font-weight: bold;
-            }}
-
-            .contenedor {{
-                width: 95%;
-                max-width: 1200px;
-                margin: 25px auto;
-            }}
-
-            .panel {{
-                background: white;
-                padding: 20px;
-                margin-bottom: 25px;
-                border-radius: 10px;
-                box-shadow: 0 2px 8px #ccc;
-                overflow-x: auto;
-            }}
-
-            h2 {{ color: #6A0DAD; }}
-
-            table {{
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 15px;
-            }}
-
-            th {{
-                background: #6A0DAD;
-                color: white;
-                padding: 12px;
-            }}
-
-            td {{
-                padding: 11px;
-                border-bottom: 1px solid #ddd;
-            }}
-
-            tr:nth-child(even) {{
-                background: #f5f5f5;
-            }}
-
-            .boton {{
-                display: inline-block;
-                padding: 9px 14px;
-                border: none;
-                border-radius: 6px;
-                color: white;
-                text-decoration: none;
-                cursor: pointer;
-                margin: 3px;
-                font-size: 13px;
-            }}
-
-            .morado {{ background: #6A0DAD; }}
-            .verde {{ background: #198754; }}
-            .azul {{ background: #0d6efd; }}
-            .rojo {{ background: #dc3545; }}
-
-            input, select {{
-                width: 100%;
-                padding: 11px;
-                margin: 8px 0 18px;
-                border: 1px solid #ccc;
-                border-radius: 6px;
-            }}
-
-            label {{ font-weight: bold; }}
-
-            .aviso {{
-                background: #d1e7dd;
-                padding: 15px;
-                margin-bottom: 20px;
-                border-radius: 6px;
-            }}
-
-            .acciones {{ white-space: nowrap; }}
-
-            footer {{
-                text-align: center;
-                padding: 20px;
-                color: #666;
-            }}
-        </style>
+        <style>{ESTILOS}</style>
     </head>
 
     <body>
 
-        <header>📚 Biblioteca Digital</header>
+        <div class="topbar">
+            <div class="topbar-inner">
+                <a class="marca" href="/">
+                    <span class="logo">📚</span>
+                    <span>Biblioteca Digital
+                        <small>Sistema de gestión</small>
+                    </span>
+                </a>
 
-        <nav>
-            <a href="/">🏠 Inicio</a>
-            <a href="/#categorias">Categorías</a>
-            <a href="/#libros">Libros</a>
-            <a href="/#usuarios">Usuarios</a>
-            <a href="/#reservas">Reservas</a>
-        </nav>
+                <nav>
+                    <a href="/">Inicio</a>
+                    <a href="/#categorias">Categorías</a>
+                    <a href="/#libros">Libros</a>
+                    <a href="/#usuarios">Usuarios</a>
+                    <a href="/#reservas">Reservas</a>
+                </nav>
+            </div>
+        </div>
 
         <div class="contenedor">
             {aviso}
             {contenido}
         </div>
 
-        <footer>Biblioteca Digital - Sistema de Gestión</footer>
+        <footer>
+            <strong>Biblioteca Digital</strong> · FastAPI · MySQL · Docker
+        </footer>
 
     </body>
     </html>
     """
 
 
+def panel_mensaje(titulo, contenido_html):
+    return pagina(f"""
+        <div class="panel formulario">
+            <div class="panel-cabecera"><h2>{titulo}</h2></div>
+            {contenido_html}
+            <div class="barra-botones">
+                <a class="btn btn-primario" href="/">Volver</a>
+            </div>
+        </div>
+    """)
+
+
 def boton_nuevo(tipo):
-    return f'<a class="boton verde" href="/nuevo/{tipo}">➕ Agregar</a>'
+    return f'<a class="btn btn-primario" href="/nuevo/{tipo}">+ Agregar</a>'
+
+
+def tarjeta_resumen(tipo, cantidad):
+    return f"""
+    <a class="tarjeta" href="/#{tipo}">
+        <div class="numero">{cantidad}</div>
+        <div class="nombre">{TABLAS[tipo]["titulo"]}</div>
+    </a>
+    """
 
 
 def tabla(tipo, filas, columnas):
@@ -214,8 +462,10 @@ def tabla(tipo, filas, columnas):
 
     resultado = f"""
     <div class="panel" id="{tipo}">
-        <h2>{config["titulo"]}</h2>
-        {boton_nuevo(tipo)}
+        <div class="panel-cabecera">
+            <h2>{config["titulo"]} <span class="contador">{len(filas)}</span></h2>
+            {boton_nuevo(tipo)}
+        </div>
 
         <table>
         <tr>
@@ -224,7 +474,16 @@ def tabla(tipo, filas, columnas):
     for columna, etiqueta in columnas:
         resultado += f"<th>{etiqueta}</th>"
 
-    resultado += "<th>Acciones</th></tr>"
+    resultado += '<th style="text-align:right">Acciones</th></tr>'
+
+    if not filas:
+        resultado += f"""
+        <tr>
+            <td class="vacio" colspan="{len(columnas) + 1}">
+                Aún no hay registros. Usa «Agregar» para crear el primero.
+            </td>
+        </tr>
+        """
 
     for fila in filas:
 
@@ -239,9 +498,9 @@ def tabla(tipo, filas, columnas):
         resultado += f"""
         <td class="acciones">
 
-            <a class="boton azul"
+            <a class="btn btn-oscuro"
                href="/editar/{tipo}/{identificador}">
-               ✏️ Editar
+               Editar
             </a>
 
             <form method="post"
@@ -249,8 +508,8 @@ def tabla(tipo, filas, columnas):
                   style="display:inline"
                   onsubmit="return confirm('¿Deseas eliminar este registro?')">
 
-                <button class="boton rojo" type="submit">
-                    🗑️ Eliminar
+                <button class="btn btn-peligro" type="submit">
+                    Eliminar
                 </button>
 
             </form>
@@ -296,7 +555,12 @@ def inicio(mensaje: str = ""):
             ON r.id_libro = l.id_libro
         """)).mappings().all()
 
-    contenido = ""
+    contenido = '<div class="resumen">'
+    contenido += tarjeta_resumen("categorias", len(categorias))
+    contenido += tarjeta_resumen("libros", len(libros))
+    contenido += tarjeta_resumen("usuarios", len(usuarios))
+    contenido += tarjeta_resumen("reservas", len(reservas))
+    contenido += "</div>"
 
     contenido += tabla(
         "categorias",
@@ -353,9 +617,11 @@ def formulario(tipo, datos=None, editar=False):
     )
 
     contenido = f"""
-    <div class="panel">
+    <div class="panel formulario">
 
-        <h2>{titulo} {config["titulo"]}</h2>
+        <div class="panel-cabecera">
+            <h2>{titulo} {config["titulo"]}</h2>
+        </div>
 
         <form method="post" action="{accion}">
     """
@@ -453,13 +719,15 @@ def formulario(tipo, datos=None, editar=False):
                 """
 
     contenido += """
-            <button class="boton verde" type="submit">
-                💾 Guardar
-            </button>
+            <div class="barra-botones">
+                <button class="btn btn-primario" type="submit">
+                    Guardar
+                </button>
 
-            <a class="boton rojo" href="/">
-                Cancelar
-            </a>
+                <a class="btn btn-borde" href="/">
+                    Cancelar
+                </a>
+            </div>
 
         </form>
     </div>
@@ -514,7 +782,10 @@ async def crear(tipo: str, request: Request):
 
     except Exception as e:
         return HTMLResponse(
-            f"Error al guardar: {escape(str(e))}<br><a href='/'>Volver</a>",
+            panel_mensaje(
+                "Error al guardar",
+                f"<p>{escape(str(e))}</p>"
+            ),
             status_code=400
         )
 
@@ -589,7 +860,10 @@ async def actualizar(tipo: str, identificador: int, request: Request):
 
     except Exception as e:
         return HTMLResponse(
-            f"Error al actualizar: {escape(str(e))}<br><a href='/'>Volver</a>",
+            panel_mensaje(
+                "Error al actualizar",
+                f"<p>{escape(str(e))}</p>"
+            ),
             status_code=400
         )
 
@@ -616,14 +890,9 @@ def eliminar(tipo: str, identificador: int):
 
                 if cantidad > 0:
                     return HTMLResponse(
-                        pagina(
-                            f"""
-                            <div class="panel">
-                                <h2>⚠️ No se puede eliminar</h2>
-                                <p>Esta categoría tiene {cantidad} libro(s) asociado(s).</p>
-                                <a class="boton morado" href="/">Volver</a>
-                            </div>
-                            """
+                        panel_mensaje(
+                            "No se puede eliminar",
+                            f"<p>Esta categoría tiene {cantidad} libro(s) asociado(s).</p>"
                         ),
                         status_code=409
                     )
@@ -639,14 +908,9 @@ def eliminar(tipo: str, identificador: int):
 
                 if cantidad > 0:
                     return HTMLResponse(
-                        pagina(
-                            f"""
-                            <div class="panel">
-                                <h2>⚠️ No se puede eliminar</h2>
-                                <p>Este usuario tiene {cantidad} reserva(s).</p>
-                                <a class="boton morado" href="/">Volver</a>
-                            </div>
-                            """
+                        panel_mensaje(
+                            "No se puede eliminar",
+                            f"<p>Este usuario tiene {cantidad} reserva(s).</p>"
                         ),
                         status_code=409
                     )
@@ -662,14 +926,9 @@ def eliminar(tipo: str, identificador: int):
 
                 if cantidad > 0:
                     return HTMLResponse(
-                        pagina(
-                            f"""
-                            <div class="panel">
-                                <h2>⚠️ No se puede eliminar</h2>
-                                <p>Este libro tiene {cantidad} reserva(s).</p>
-                                <a class="boton morado" href="/">Volver</a>
-                            </div>
-                            """
+                        panel_mensaje(
+                            "No se puede eliminar",
+                            f"<p>Este libro tiene {cantidad} reserva(s).</p>"
                         ),
                         status_code=409
                     )
@@ -689,14 +948,9 @@ def eliminar(tipo: str, identificador: int):
 
     except Exception as e:
         return HTMLResponse(
-            pagina(
-                f"""
-                <div class="panel">
-                    <h2>Error al eliminar</h2>
-                    <p>{escape(str(e))}</p>
-                    <a class="boton morado" href="/">Volver</a>
-                </div>
-                """
+            panel_mensaje(
+                "Error al eliminar",
+                f"<p>{escape(str(e))}</p>"
             ),
             status_code=400
         )
